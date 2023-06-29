@@ -1,0 +1,16 @@
+node {
+    def mvnHome = tool name: 'mvn-home', type: 'maven'
+    stage('scm-checkout') {
+        git branch: 'main', credentialsId: 'git-credit', 
+	    url: 'https://github.com/Rudhanlm10/nmy-repo.git'
+    }
+    stage('clean-package') {
+        sh "${mvnHome}/bin/mvn clean package"
+    }
+    stage('test') {
+        sh "${mvnHome}/bin/mvn test""
+    }
+	stage('clean-compile') {
+        sh "${mvnHome}/bin/mvn clean compile""
+    }
+}
