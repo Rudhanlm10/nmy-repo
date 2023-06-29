@@ -1,1 +1,29 @@
-
+pipeline {
+    agent any
+	tools {
+      maven 'mvn-home'
+    }
+    stages {
+        stage('scm-checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'git-credit', 
+				url: 'https://github.com/Rudhanlm10/nmy-repo.git'
+            }
+        }
+        stage('clean-compile') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }		
+        stage('test') {
+            steps {
+                sh'mvn test'
+            }
+        }
+        stage('clean-package') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }		
+    }
+}
