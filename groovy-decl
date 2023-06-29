@@ -17,7 +17,7 @@ pipeline {
         }		
         stage('test') {
             steps {
-                sh'mvn test'
+                h'mvn test'
             }
         }
         stage('clean-package') {
